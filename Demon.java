@@ -1,21 +1,14 @@
  
 /**
- * Write a description of class Demon here.
+ * Chance for extreme magical damage for all demons
  *
  * @author Craig Hussey
  * @version 11.7.2020
  */
 public abstract class Demon extends Creature
 {
-    private int str; //strength of this Demon
-    private int hp;         // the current numberof hit points the Demon has
-    private int max_hp;     // The maximum hit points the Demon can have (used if healing enabled)  
     private static final int MAGICDMG = 50;
     /**
-     * Create a Demon with a given strength and hit point level. 
-     * Store max hitpoints to allow for healing to be implemented later
-     * Heals must never allow for more hit points than the Demon started
-     * with
      * @param str the strength of the creature, used to calculate damage
      * @param hp the health of the Demon at the start of the simulation, and the current health levels during battle
      */
@@ -30,7 +23,7 @@ public abstract class Demon extends Creature
     public int attack()
     {
         if (Randomizer.nextInt(100)>95) {
-            System.out.println("50 extra magic damage added!");
+            //System.out.println("50 extra magic damage added!");
             return super.attack() + MAGICDMG;
     }
         else

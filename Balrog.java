@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class Balrog here.
+ * Exceptionally strong - attacks twice. ["Fly, you fools."  Gandalf the Grey]
  *
  * @author Craig Hussey
  * @version 11.07.2020
@@ -21,6 +21,7 @@ public class Balrog extends Demon
             Randomizer.nextInt(MAX_BALROG_STR-MIN_BALROG_STR)+MIN_BALROG_STR,
             Randomizer.nextInt(MAX_BALROG_HP-MIN_BALROG_HP)+MIN_BALROG_HP
         ); 
+        setCreatureType("Balrog");
     }
     
     /**
@@ -28,9 +29,9 @@ public class Balrog extends Demon
      */   
     public int attack() {
         int attackOne = super.attack(); 
-        System.out.println(this + " hit for " + attackOne);
+        //System.out.println(getCreatureType() + " hit for " + attackOne);
         int attackTwo = super.attack();
-        System.out.println(this + " hit for " + attackTwo);
+        //System.out.println(getCreatureType() + " hit for " + attackTwo);
         return attackOne + attackTwo;
     }
     

@@ -21,5 +21,6 @@ public class Halfling extends Creature
             Randomizer.nextInt(MAX_HALFLING_STR-MIN_HALFLING_STR)+MIN_HALFLING_STR,
             Randomizer.nextInt(MAX_HALFLING_HP-MIN_HALFLING_HP)+MIN_HALFLING_HP
         ); 
+        setCreatureType("Halfling");
     }
 }

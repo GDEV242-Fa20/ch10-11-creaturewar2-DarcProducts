@@ -16,6 +16,7 @@ public abstract class Creature
     private int str;        // The strength of this creature
     private int max_hp;     // The maximum hit points the creature can have (used if healing enabled)
     private int hp;         // the current numberof hit points the creature has
+    private String creatureType;
     /**
      * default constructor - this should never actually run.
      * It is the job of dervived classes to set up the proper number of hit points and 
@@ -47,7 +48,9 @@ public abstract class Creature
      * @return a value between 1 and str to be used to cause damage to another creature
      */
     public int attack(){
-        return Randomizer.nextInt(this.str - 1) + 1;
+        int attackDMG = Randomizer.nextInt(this.str - 1) + 1;
+        //System.out.println(creatureType + " dealt " + attackDMG + " damage!");
+        return attackDMG;
     }
     
     
@@ -64,6 +67,7 @@ public abstract class Creature
      * @return true when current hit point level is less than or equal to zero
      */
     public boolean isKnockedOut() {
+        //System.out.println(creatureType + " is knocked out!");
         return hp<1;
     }
     
@@ -84,12 +88,18 @@ public abstract class Creature
    public int getHealth() {
        return hp;
     }
-    
-     /**
-     * gets the current strength
-     * @return
+        
+    /**
+     * gets the current creature type
      */
-   public int getStrength() {
-       return str;
+   public String getCreatureType() {
+       return creatureType;
+    }
+    
+    /**
+     * sets the current creature type as a string
+     */
+   public void setCreatureType(String name) {
+       creatureType = name;
     }
 }

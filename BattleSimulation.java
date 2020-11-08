@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Stack;
 /**
  * Write a description of class BattleSimulation here.
  *
@@ -7,53 +7,79 @@ import java.util.ArrayList;
  */
 public class BattleSimulation
 {
-    private ArrayList<Creature> armyOne;
-    private ArrayList<Creature> armyTwo;
-        
+    private Stack<Creature> goodArmy;
+    private Stack<Creature> evilArmy;
+       
+    /**
+     * constructor for preset battle simulator
+     */
     public BattleSimulation () {
-        armyOne = new ArrayList();
-        armyTwo = new ArrayList();
-        int numberArmyOne = 1;
-        while (armyOne.size()<100) {
-            Creature myCreature = chooseRandomCreatureForArmyOne();
-            armyOne.add(myCreature);
-            System.out.println(numberArmyOne + ":" + " Added " + myCreature);
-            numberArmyOne++;
+        goodArmy = new Stack();
+        evilArmy = new Stack();
+        int evilArmySize = Randomizer.nextInt(50-30) + 30;
+        while (goodArmy.size()<100) {
+            goodArmy.push(chooseRandomCreatureForgoodArmy());
         }
-        int numberArmyTwo = 1;
-        while (armyTwo.size()<Randomizer.nextInt(50-30)+30) {
-            Creature myCreature = chooseRandomCreatureForArmyTwo();
-            armyTwo.add(myCreature);
-            System.out.println(numberArmyTwo + ":" + " Added " + myCreature);
-            numberArmyTwo++;
-        }
+        while (evilArmy.size()<evilArmySize) {
+            evilArmy.push(chooseRandomCreatureForevilArmy());
+        }       
+        startBattle();
     }
     
-    public BattleSimulation (int armyOneSize, int armyTwoSize) {
-        armyOne = new ArrayList();
-        armyTwo = new ArrayList();
-        armyOneSize = armyOneSize > 999999 ? 999999 : armyOneSize < 1 ? 1 : armyOneSize;
-        armyTwoSize = armyTwoSize > 999999 ? 999999 : armyTwoSize < 1 ? 1 : armyTwoSize;
-        while (armyOne.size()<armyOneSize) {
-            Creature myCreature = chooseRandomCreatureForArmyOne();
-            armyOne.add(myCreature);
-            System.out.println("Added " + myCreature);
+    /**
+     * sets up a new battle simulation with custom size armies
+     * @param goodArmySize the size of the army of light
+     * @param evilArmySize the size of the army of darkness
+     */
+    public BattleSimulation (int goodArmySize, int evilArmySize) {
+        goodArmy = new Stack();
+        evilArmy = new Stack();
+        goodArmySize = goodArmySize > 999999 ? 999999 : goodArmySize < 1 ? 1 : goodArmySize; //clamps goodArmy size between a value of 1 and 999999
+        evilArmySize = evilArmySize > 999999 ? 999999 : evilArmySize < 1 ? 1 : evilArmySize; //clamps evilArmy size between a value of 1 and 999999
+        while (goodArmy.size()<goodArmySize) {
+            goodArmy.push(chooseRandomCreatureForgoodArmy());
         }
-        while (armyTwo.size()<armyTwoSize) {
-            Creature myCreature = chooseRandomCreatureForArmyTwo();
-            armyTwo.add(myCreature);
-            System.out.println("Added " + myCreature);
+        while (evilArmy.size()<evilArmySize) {
+            evilArmy.push(chooseRandomCreatureForevilArmy());
         }
+        startBattle();
     }
     
+    /**
+     * main method to start without blueJ
+     */
     public static void main(String[] args) {
         BattleSimulation thisBattle = new BattleSimulation();
     }
     
-    private void startBattle(ArrayList armyOne, ArrayList armyTwo) {
+    /**
+     * the main battle loop
+     */
+    private void startBattle() {
+     while (!goodArmy.isEmpty() && !evilArmy.isEmpty()) {
+         Creature goodArmyCreature = goodArmy.peek();
+         Creature evilArmyCreature = evilArmy.peek();
+             goodArmy.peek().takeDamage(evilArmyCreature.attack());
+             evilArmyCreature.takeDamage(goodArmyCreature.attack());
+         if (goodArmyCreature.isKnockedOut()) {
+             goodArmy.pop();
+         }
+         if (evilArmyCreature.isKnockedOut()) {
+             evilArmy.pop();
+         }
+    }  
+    System.out.println();
+    if (!goodArmy.isEmpty())
+    System.out.println("The good army was victorious with " + goodArmy.size() + " remaining heroes!");
+    if (!evilArmy.isEmpty())
+    System.out.println("The evil army was victorious with " + evilArmy.size() + " remaining foes!");
     }
     
-    public Creature chooseRandomCreatureForArmyOne() {
+    /**
+     * returns a new creature from Army One;
+     * @return
+     */
+    public Creature chooseRandomCreatureForgoodArmy() {
         int randNum = Randomizer.nextInt(10);
         if (randNum < 7) 
         return new Human();
@@ -63,7 +89,11 @@ public class BattleSimulation
         return new Elf();
     }
     
-    public Creature chooseRandomCreatureForArmyTwo() {
+    /**
+     * returns a new creature from Army Two;
+     * @return
+     */
+    public Creature chooseRandomCreatureForevilArmy() {
         int randNum = Randomizer.nextInt(25);
         if (randNum < 19) 
         return new FesteringHag();

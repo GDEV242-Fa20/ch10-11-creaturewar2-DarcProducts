@@ -1,6 +1,6 @@
 
 /**
- * Write a description of class CyberDemon here.
+ * An hideous Cyber Demon with wires coming out of its body
  *
  * @author Craig Hussey
  * @version 11.07.2020
@@ -21,6 +21,7 @@ public class CyberDemon extends Demon
             Randomizer.nextInt(MAX_CYBERDEMON_STR-MIN_CYBERDEMON_STR)+MIN_CYBERDEMON_STR,    
             Randomizer.nextInt(MAX_CYBERDEMON_HP-MIN_CYBERDEMON_HP)+MIN_CYBERDEMON_HP
         ); 
+        setCreatureType("Cyber Demon");
     }
 
 }

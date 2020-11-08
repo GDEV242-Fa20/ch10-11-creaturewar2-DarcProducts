@@ -36,7 +36,7 @@ public class Human extends Creature
             Randomizer.nextInt(MAX_HUMAN_STR-MIN_HUMAN_STR)+MIN_HUMAN_STR,    
             Randomizer.nextInt(MAX_HUMAN_HP-MIN_HUMAN_HP)+MIN_HUMAN_HP
         );
-          
+        setCreatureType("Human");
     }
     
     
