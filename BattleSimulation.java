@@ -34,8 +34,8 @@ public class BattleSimulation
     public BattleSimulation (int goodArmySize, int evilArmySize) {
         goodArmy = new Stack();
         evilArmy = new Stack();
-        goodArmySize = goodArmySize > 999999 ? 999999 : goodArmySize < 1 ? 1 : goodArmySize; //clamps goodArmy size between a value of 1 and 999999
-        evilArmySize = evilArmySize > 999999 ? 999999 : evilArmySize < 1 ? 1 : evilArmySize; //clamps evilArmy size between a value of 1 and 999999
+        goodArmySize = goodArmySize > 999999999 ? 99999999 : goodArmySize < 1 ? 1 : goodArmySize; //clamps goodArmy size between a value of 1 and 999999999
+        evilArmySize = evilArmySize > 999999999 ? 99999999 : evilArmySize < 1 ? 1 : evilArmySize; //clamps evilArmy size between a value of 1 and 999999999
         while (goodArmy.size()<goodArmySize) {
             goodArmy.push(chooseRandomCreatureForgoodArmy());
         }
