@@ -16,7 +16,6 @@ public abstract class Creature
     private int str;        // The strength of this creature
     private int max_hp;     // The maximum hit points the creature can have (used if healing enabled)
     private int hp;         // the current numberof hit points the creature has
-    
     /**
      * default constructor - this should never actually run.
      * It is the job of dervived classes to set up the proper number of hit points and 
@@ -37,7 +36,9 @@ public abstract class Creature
      * @param hp the health of the creature at the start of the simulation, and the current health levels during battle
      */
     public Creature (int str, int hp) {
-       //implement this
+       this.str = str > 999 ? 999 : str < 1 ? 1 : str; //clamps strength to value between 1 and 999
+       this.hp = hp > 999 ? 999 : hp < 1 ? 1 : hp; //clamps health to value between 1 and 999
+       max_hp = this.hp; //sets max_hp to this.hp
     }
     
     
@@ -46,8 +47,7 @@ public abstract class Creature
      * @return a value between 1 and str to be used to cause damage to another creature
      */
     public int attack(){
-        // TODO: implement a damage method
-        return 0;
+        return Randomizer.nextInt(this.str - 1) + 1;
     }
     
     
@@ -56,8 +56,7 @@ public abstract class Creature
      * @return true when current hit point level is greater than zero
      */
     public boolean isAlive() {
-        // TODO: implement a method to report if the creature yet lives
-        return false; //change this
+        return hp>0;
     }
     
     /**
@@ -65,8 +64,7 @@ public abstract class Creature
      * @return true when current hit point level is less than or equal to zero
      */
     public boolean isKnockedOut() {
-        //TODO: implement a method to report if the creature has been killed
-        return false; //change this
+        return hp<1;
     }
     
     
@@ -76,7 +74,22 @@ public abstract class Creature
      * @param damage value to remove from hit point count
      */
     public void takeDamage(int damage) {
-        // TODO: implement this
+        hp -= damage;
     }
     
+    /**
+     * gets the current health
+     * @return
+     */
+   public int getHealth() {
+       return hp;
+    }
+    
+     /**
+     * gets the current strength
+     * @return
+     */
+   public int getStrength() {
+       return str;
+    }
 }
