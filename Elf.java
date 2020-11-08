@@ -29,10 +29,9 @@ public class Elf extends Creature
      */
     public int attack()
     {
-        if (Randomizer.nextInt(100)>90) {
-        return super.attack() * 2;
-        }
-        else
-        return super.attack();
+        if (Randomizer.nextInt(100)>90) 
+            return super.attack() * 2;
+        else 
+            return super.attack();
     }
 }

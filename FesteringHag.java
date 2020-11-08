@@ -25,13 +25,15 @@ public class FesteringHag extends Demon
     }
     
     /**
-     * special ability: 15% chance to deal an extra 10 magic damage
+     * special ability: 10% chance to deal an extra 10 magic damage
      */
-    public int attack() {
-        if (Randomizer.nextInt(100)>85) {
+    public int attack() 
+    {
+        if (Randomizer.nextInt(100)>90) 
+        {
             //System.out.println("10 extra magic damage added!");
             return super.attack() + 10;
-    }
+        }
         else
         return super.attack();
     }

@@ -22,7 +22,8 @@ public abstract class Creature
      * It is the job of dervived classes to set up the proper number of hit points and 
      * strength for the subclass
      */
-    public Creature (){
+    public Creature ()
+    {
         str=10;
         hp=10;
         max_hp = hp;
@@ -36,7 +37,8 @@ public abstract class Creature
      * @param str the strength of the creature, used to calculate damage
      * @param hp the health of the creature at the start of the simulation, and the current health levels during battle
      */
-    public Creature (int str, int hp) {
+    public Creature (int str, int hp) 
+    {
        this.str = str > 999 ? 999 : str < 1 ? 1 : str; //clamps strength to value between 1 and 999
        this.hp = hp > 999 ? 999 : hp < 1 ? 1 : hp; //clamps health to value between 1 and 999
        max_hp = this.hp; //sets max_hp to this.hp
@@ -47,7 +49,8 @@ public abstract class Creature
      * Allows a creature to determine how much damage it is causing in this round of battle
      * @return a value between 1 and str to be used to cause damage to another creature
      */
-    public int attack(){
+    public int attack()
+    {
         int attackDMG = Randomizer.nextInt(this.str - 1) + 1;
         //System.out.println(creatureType + " dealt " + attackDMG + " damage!");
         return attackDMG;
@@ -58,7 +61,8 @@ public abstract class Creature
      * Is this creature still capable of fighting?
      * @return true when current hit point level is greater than zero
      */
-    public boolean isAlive() {
+    public boolean isAlive() 
+    {
         return hp>0;
     }
     
@@ -66,7 +70,8 @@ public abstract class Creature
      * Is this creature knockedOut?
      * @return true when current hit point level is less than or equal to zero
      */
-    public boolean isKnockedOut() {
+    public boolean isKnockedOut() 
+    {
         //System.out.println(creatureType + " is knocked out!");
         return hp<1;
     }
