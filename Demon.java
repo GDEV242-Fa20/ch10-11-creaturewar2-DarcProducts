@@ -10,7 +10,7 @@ public abstract class Demon extends Creature
     private static final int MAGICDMG = 50;
     /**
      * @param str the strength of the creature, used to calculate damage
-     * @param hp the health of the Demon at the start of the simulation, and the current health levels during battle
+     * @param hp the health of the Demon at the start of the simulation, and the current health level during battle
      */
     public Demon (int str, int hp) {
        //clamps strength and hp to a value between 1 and 999

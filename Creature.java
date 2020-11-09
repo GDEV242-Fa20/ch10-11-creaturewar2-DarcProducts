@@ -16,7 +16,7 @@ public abstract class Creature
     private int str;        // The strength of this creature
     private int max_hp;     // The maximum hit points the creature can have (used if healing enabled)
     private int hp;         // the current numberof hit points the creature has
-    private String creatureType;
+    private String creatureType; //stores the type of creature for data use
     /**
      * default constructor - this should never actually run.
      * It is the job of dervived classes to set up the proper number of hit points and 
@@ -34,13 +34,14 @@ public abstract class Creature
      * Store max hitpoints to allow for healing to be implemented later
      * Heals must never allow for more hit points than the creature started
      * with
-     * @param str the strength of the creature, used to calculate damage
-     * @param hp the health of the creature at the start of the simulation, and the current health levels during battle
+     * @param str the strength of the creature, used to calculate damage {MAX 999}
+     * @param hp the health of the creature at the start of the simulation, {MAX 9999}
+     * and the current health levels during battle
      */
     public Creature (int str, int hp) 
     {
        this.str = str > 999 ? 999 : str < 1 ? 1 : str; //clamps strength to value between 1 and 999
-       this.hp = hp > 999 ? 999 : hp < 1 ? 1 : hp; //clamps health to value between 1 and 999
+       this.hp = hp > 9999 ? 9999 : hp < 1 ? 1 : hp; //clamps health to value between 1 and 9999
        max_hp = this.hp; //sets max_hp to this.hp
     }
     
@@ -96,6 +97,7 @@ public abstract class Creature
         
     /**
      * gets the current creature type
+     * @return
      */
    public String getCreatureType() {
        return creatureType;
@@ -103,6 +105,7 @@ public abstract class Creature
     
     /**
      * sets the current creature type as a string
+     * @param sets string value for name of creature
      */
    public void setCreatureType(String name) {
        creatureType = name;

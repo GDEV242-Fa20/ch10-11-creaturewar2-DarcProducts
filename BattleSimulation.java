@@ -1,6 +1,11 @@
 import java.util.Stack;
 /**
- * The Battle Simulator ~ Creating a BattleSimulation will have a default good army of 100 creatures, and a default evil army with between 30-50 creatures. You are also
+ * The Battle Simulator ~ Simulate a battle between two opposing forces
+ * ~Battle between an army of Humans, Elves, and Halflings as the warriors of light.
+ * The battle is simulated with the evil side usually having half the size of an army
+ * because of the strength and size of the creatures of darkness. They are: Festering Hags, 
+ * Cyber Demon's, and Balrogs. Creating a BattleSimulation will have a default good army 
+ * of 100 creatures, and a default evil army with between 30-50 creatures. You are also
  * able to create a battle simulator with custom army sizes. 
  *
  * @author Craig Hussey
@@ -15,8 +20,8 @@ public class BattleSimulation
      * constructor for preset battle simulator
      */
     public BattleSimulation () {
-        goodArmy = new Stack();
-        evilArmy = new Stack();
+        goodArmy = new Stack(); //initialize a new stack for an army of light
+        evilArmy = new Stack(); //initialize a new stack for an army of darkness
         int evilArmySize = Randomizer.nextInt(50-30) + 30; //set evil army size to a value between 30-50
         while (goodArmy.size()<100) 
             goodArmy.push(chooseRandomCreatureForgoodArmy()); //choose a creature out of good creatures and add to a stack ~first constructor~
@@ -27,12 +32,14 @@ public class BattleSimulation
     
     /**
      * sets up a new battle simulation with custom size armies
-     * @param goodArmySize the size of the army of light
-     * @param evilArmySize the size of the army of darkness
+     * @param goodArmySize the size of the army of light MAX {10000000}
+     * @param evilArmySize the size of the army of darkness {10000000} 
+     *usually set to around half of army of light because of the difference in toughness of creatures
      */
-    public BattleSimulation (int goodArmySize, int evilArmySize) {
-        goodArmy = new Stack();
-        evilArmy = new Stack();
+    public BattleSimulation (int goodArmySize, int evilArmySize) 
+    {
+        goodArmy = new Stack(); //initialize a new stack for an army of light
+        evilArmy = new Stack(); //initialize a new stack for an army of darkness
         goodArmySize = goodArmySize >  10000000 ?  10000000 : goodArmySize < 1 ? 1 : goodArmySize; //clamps goodArmy size between a value of 1 and  10000000
         evilArmySize = evilArmySize >  10000000 ?  10000000 : evilArmySize < 1 ? 1 : evilArmySize; //clamps evilArmy size between a value of 1 and  10000000
         while (goodArmy.size()<goodArmySize) 
@@ -43,11 +50,11 @@ public class BattleSimulation
     }
     
     /**
-     * main method to start without blueJ
+     * main method to run without blueJ
      */
     public static void main(String[] args) 
     {
-        BattleSimulation thisBattle = new BattleSimulation();
+        BattleSimulation thisBattle = new BattleSimulation(); //creates a new {preset} battle simulation
     }
     
     /**
@@ -59,11 +66,11 @@ public class BattleSimulation
     {
         Creature goodArmyCreature = goodArmy.peek(); //look at top object in good army stack
         Creature evilArmyCreature = evilArmy.peek(); //look at top object in evil army stack
-        goodArmyCreature.takeDamage(evilArmyCreature.attack()); //apply damage to top creature in stack
-        evilArmyCreature.takeDamage(goodArmyCreature.attack()); //apply damage to top creature in stack
-        if (goodArmyCreature.isKnockedOut()) //if good creature is dead, remove from top of stack of good army
+        goodArmyCreature.takeDamage(evilArmyCreature.attack()); //apply damage to top hero in stack
+        evilArmyCreature.takeDamage(goodArmyCreature.attack()); //apply damage to top foe in stack
+        if (goodArmyCreature.isKnockedOut()) //if good creature is knocked out remove from top of stack of good army
             goodArmy.pop();
-        if (evilArmyCreature.isKnockedOut()) //if evil creature is dead, remove from top of stack of evil army
+        if (evilArmyCreature.isKnockedOut()) //if evil creature is knocked out remove from top of stack of evil army
             evilArmy.pop();
     }  
         System.out.println();
@@ -77,7 +84,7 @@ public class BattleSimulation
      * returns a new creature for good army
      * @return
      */
-    public Creature chooseRandomCreatureForgoodArmy() 
+    private Creature chooseRandomCreatureForgoodArmy() 
     {
         int randNum = Randomizer.nextInt(10);
         if (randNum < 7) 
@@ -92,15 +99,39 @@ public class BattleSimulation
      * returns a new creature for evil army
      * @return
      */
-    public Creature chooseRandomCreatureForevilArmy() 
+    private Creature chooseRandomCreatureForevilArmy() 
     {
         int randNum = Randomizer.nextInt(25);
-        
         if (randNum < 19) 
             return new FesteringHag();
         else if (randNum > 18 && randNum < 25) 
             return new CyberDemon();
         else 
             return new Balrog();
+    }
+    
+    /**
+     * prints current creatures left in army so you can see who is the victors
+     */
+    public void printArmyInfo()
+    {
+        if (!goodArmy.isEmpty())
+        {
+            int count = 1;
+            for (Creature thisCreature : goodArmy)
+            {
+                System.out.println(count + ": " + thisCreature.getCreatureType());
+                count++;
+            }
+        }
+        if (!evilArmy.isEmpty())
+        {
+            int count = 1;
+            for (Creature thisCreature : evilArmy)
+            {
+                System.out.println(count + ": " + thisCreature.getCreatureType());
+                count++;
+            }
+        }
     }
 }

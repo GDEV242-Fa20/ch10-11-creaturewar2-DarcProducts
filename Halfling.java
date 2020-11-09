@@ -1,16 +1,16 @@
 
 /**
- * Write a description of class Halfling here.
+ * Short folk with big hairy feet
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Craig Hussey
+ * @version 11.08.2020
  */
 public class Halfling extends Creature
 {
     private static final int MAX_HALFLING_HP = 20;
     private static final int MIN_HALFLING_HP = 8;
-    private static final int MAX_HALFLING_STR = 10;
-    private static final int MIN_HALFLING_STR = 4;
+    private static final int MAX_HALFLING_STR = 20;
+    private static final int MIN_HALFLING_STR =8;
     /**
      * Constructor for objects of class Elf
      */
